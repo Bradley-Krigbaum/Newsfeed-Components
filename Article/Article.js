@@ -152,6 +152,8 @@ const createArticle =
     newArticle.appendChild(articleButton);
 
     // set class names
+    newArticle.classList.add('article');
+    articleContentDate.classList.add('date');
     articleButton.classList.add('expandButton');
 
     // add content
@@ -160,11 +162,13 @@ const createArticle =
     articleContent1.textContent = firstParagraph;
     articleContent2.textContent = secondParagraph;
     articleContent3.textContent = thirdParagraph;
+    articleButton.textContent = '\u25bc';
+    
 
     
     // add event handler
-    articleButton.addEventListener('mouseover', () => {
-      articleButton.classList.toggle('article-open')
+    articleButton.addEventListener('click', () => {
+      newArticle.classList.toggle('article-open')
     })
   
     // return the article
