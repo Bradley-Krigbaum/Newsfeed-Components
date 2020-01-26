@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'THIS IS A WARNING!!!',
+    date: 'Jan 2nd 2020',
+    firstParagraph: `TEST!!!! Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+    hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+    hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+    hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    secondParagraph: `TEST!!!! Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+    hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+    hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+    hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `TEST!!!! Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+    hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+    hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+    hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `
   }
 ];
 
@@ -101,6 +119,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
+
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
@@ -110,5 +129,56 @@ const data = [
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
 */
+
+const createArticle = 
+(title, date, firstParagraph, secondParagraph, thirdParagraph) => {
+
+    // create elements
+    const newArticle = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleContentDate = document.createElement('p');
+    const articleContent1 = document.createElement('p');
+    const articleContent2 = document.createElement('p');
+    const articleContent3 = document.createElement('p');
+    const articleButton = document.createElement('span');
+
+    // tree-like structure for elements
+    newArticle.appendChild(articleTitle);
+    newArticle.appendChild(articleContentDate);
+    newArticle.appendChild(articleContent1);
+    newArticle.appendChild(articleContent2);
+    newArticle.appendChild(articleContent3);
+    newArticle.appendChild(articleButton);
+
+    // set class names
+    newArticle.classList.add('article');
+    articleContentDate.classList.add('date');
+    articleButton.classList.add('expandButton');
+
+    // add content
+    articleTitle.textContent = title;
+    articleContentDate.textContent = date;
+    articleContent1.textContent = firstParagraph;
+    articleContent2.textContent = secondParagraph;
+    articleContent3.textContent = thirdParagraph;
+    articleButton.textContent = '\u25bc';
+    
+
+    
+    // add event handler
+    articleButton.addEventListener('click', () => {
+      newArticle.classList.toggle('article-open')
+    })
+  
+    // return the article
+    return newArticle;
+}
+
+// create entry point
+const pointOfEntry = document.querySelector('.articles');
+
+// add articles to entry point
+data.forEach(data => {
+  pointOfEntry.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+});
